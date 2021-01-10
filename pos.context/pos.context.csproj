@@ -5,11 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Aplication\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\domain\domain.csproj" />
+    <Folder Include="FluentConfigurations\" />
   </ItemGroup>
 
 </Project>

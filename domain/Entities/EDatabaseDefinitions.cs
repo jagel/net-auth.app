@@ -1,4 +1,4 @@
-﻿namespace domain.Application
+﻿namespace domain.Entities
 {
     public enum EDB_ItemStatus
     {

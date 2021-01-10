@@ -4,7 +4,7 @@ using System.Text;
 
 namespace domain.Entities
 {
-    public static class DatabaseStandars
+    public static class DatabaseStandards
     {
         public static int ENUM_NAME = 20;
         public static int KEY_NAME = 10;
