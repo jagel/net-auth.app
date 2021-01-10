@@ -11,6 +11,9 @@ namespace pos.Core.Domain.Entities
         {
             CatalogItems = new HashSet<CatalogItem>();
         }
+
+        public int OrderDisplay { get; set; }
+
         public virtual IEnumerable<CatalogItem> CatalogItems { get; set; }
     }
 }

@@ -5,16 +5,19 @@ using System.Text;
 
 namespace pos.Core.Domain.Entities
 {
-    public class PurchaseSummary : BaseEntitySingle
+    public class Purchase : BaseEntitySingle
     {
-        public PurchaseSummary()
+        public Purchase()
         {
             PurchaseProducts = new HashSet<PurchaseProduct>();
         }
         public decimal Discount { get; set; }
-        public int TotalProducts { get; set; }
-        public int Total { get; set; }
+        public decimal Total { get; set; }
         public DateTime PurchaseDate { get; set; }
+
+        public int UserId { get; set; }
+
+        public virtual User User { get; set; }
 
         public IEnumerable<PurchaseProduct> PurchaseProducts { get; set; }
     }

@@ -28,9 +28,16 @@ namespace context.AutoModelBuilder
                 entity.Property(x => x.Status)
                     .HasDefaultValue(EDB_ItemStatus.Active)
                     .HasConversion(Converters.FromEnum<EDB_ItemStatus>())
-                    .IsRequired(true)
-                    .HasComment("Standard Status");
+                    .IsRequired(true);
 
+                entity.Property(x => x.CreatedDate)
+                    .HasColumnType(DatabaseStandards.SQL_DATETIME)
+                    .IsRequired(true)
+                    .HasDefaultValueSql(DatabaseStandards.SQL_SETCURRENTTIME);
+
+                entity.Property(x => x.UpdatedDate)
+                    .HasColumnType(DatabaseStandards.SQL_DATETIME)
+                    .IsRequired(false);
             });
 
             return modelBuilder;

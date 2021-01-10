@@ -8,6 +8,7 @@ namespace context.AutoModelBuilder
 {
     public class BuildBaseEntityDescriptive<TEntity> : IBaseEntityModelBuilder where TEntity : BaseEntityDescriptive, new()
     {
+
         public ModelBuilder BuildBaseEntity(ModelBuilder modelBuilder)
         {
             string EntityName = typeof(TEntity).Name;

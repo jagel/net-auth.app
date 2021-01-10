@@ -1,4 +1,5 @@
 ﻿using domain.Entities.Bases;
+using System.Collections.Generic;
 
 namespace pos.Core.Domain.Entities
 {

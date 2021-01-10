@@ -12,7 +12,7 @@ namespace pos.Core.Domain.Entities
             Products = new HashSet<Product>();
         }
         public string Name { get; set; }
-        public int Order { get; set; }
+        public int? Order { get; set; }
         public string ItemKey { get; set; }
 
         public int CatalogId { get; set; }

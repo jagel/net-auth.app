@@ -8,6 +8,7 @@ namespace domain.Entities
     {
         public static int ENUM_NAME = 20;
         public static int KEY_NAME = 10;
+        public static int KEYSHORT_NAME = 50;
         public static int KEYLONG_NAME = 100;
 
         public static int I18N_KEYNAME = 20;

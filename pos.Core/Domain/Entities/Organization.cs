@@ -7,6 +7,7 @@ namespace pos.Core.Domain.Entities
     {
         public Organization()
         {
+            OrganizationChilds = new HashSet<Organization>();
             OrganizationUsers = new HashSet<OrganizationUser>();
             ProductPrices = new HashSet<ProductPrice>();
             Stocks = new HashSet<Stock>();
@@ -16,6 +17,7 @@ namespace pos.Core.Domain.Entities
 
         public virtual Organization OrganizationParent { get; set; }
 
+        public virtual IEnumerable<Organization> OrganizationChilds { get; set; }
         public virtual IEnumerable<OrganizationUser> OrganizationUsers { get; set; }
         public virtual IEnumerable<ProductPrice> ProductPrices { get; set; }
         public virtual IEnumerable<Stock> Stocks { get; set; }
