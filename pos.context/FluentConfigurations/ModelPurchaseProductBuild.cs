@@ -1,5 +1,6 @@
 ﻿using context.AutoModelBuilder;
 using context.Interfaces;
+using domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using pos.Core.Domain.Entities;
 using System;
@@ -16,9 +17,7 @@ namespace pos.context.FluentConfigurations
                     .IsRequired(true);
 
                 entity.Property(x => x.UnitPrice)
-                    .IsRequired(true);
-
-                entity.Property(x => x.Total)
+                    .HasColumnType(DatabaseStandards.SQL_DECIMALTWOPLACES)
                     .IsRequired(true);
 
                 entity.HasOne(x => x.Product)

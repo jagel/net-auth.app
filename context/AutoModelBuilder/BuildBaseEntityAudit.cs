@@ -27,6 +27,7 @@ namespace context.AutoModelBuilder
 
                 entity.Property(x => x.Status)
                     .HasDefaultValue(EDB_ItemStatus.Active)
+                    .HasMaxLength(DatabaseStandards.ENUM_NAME)
                     .HasConversion(Converters.FromEnum<EDB_ItemStatus>())
                     .IsRequired(true);
 

@@ -22,11 +22,12 @@ namespace context.AutoModelBuilder
                     .HasColumnName(EntityPKName);
 
                 entity.HasKey(x => x.Id)
-                    .HasName(EntityName);
+                    .HasName(EntityPKName);
 
                 entity.Property(x => x.Status)
                     .HasDefaultValue(EDB_ItemStatus.Active)
                     .HasConversion(Converters.FromEnum<EDB_ItemStatus>())
+                    .HasMaxLength(DatabaseStandards.ENUM_NAME)
                     .IsRequired(true)
                     .HasComment("Standard Status");
             });

@@ -18,17 +18,17 @@ namespace pos.context.FluentConfigurations
                 
                 entitiy.Property(x => x.UserStatus)
                     .HasDefaultValue(EDB_UserStatus.Offline)
+                    .HasMaxLength(DatabaseStandards.ENUM_NAME)
                     .HasConversion(Converters.FromEnum<EDB_UserStatus>())
                     .IsRequired(true);
+
+                entitiy.HasOne(x => x.Organization)
+                   .WithMany(x => x.OrganizationUsers)
+                   .HasForeignKey(x => x.OrganizationId);
 
                 entitiy.HasOne(x => x.User)
                     .WithMany(x => x.OrganizationUsers)
                     .HasForeignKey(x => x.UserId);
-
-                entitiy.HasOne(x => x.Organization)
-                    .WithMany(x => x.OrganizationUsers)
-                    .HasForeignKey(x => x.OrganizationId);
-
             });
 
             return modelBuilder;

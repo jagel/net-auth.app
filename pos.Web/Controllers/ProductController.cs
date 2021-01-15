@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using pos.context.dbContext;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,15 +15,19 @@ namespace pos.Web.Controllers
     public class ProductController : ControllerBase
     {
         private readonly ILogger<ProductController> _logger;
-        public ProductController(ILogger<ProductController> logger)
+        private readonly PosDbContext _contex;
+
+        public ProductController(ILogger<ProductController> logger, PosDbContext contex)
         {
             _logger = logger;
+            _contex = contex;
         }
 
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IActionResult> Get()
         {
-            return null;
+            var users = await _contex.Product.ToListAsync();
+            return Ok(users);
         }
     }
 }

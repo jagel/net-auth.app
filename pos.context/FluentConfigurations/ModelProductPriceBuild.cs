@@ -1,5 +1,6 @@
 ﻿using context.AutoModelBuilder;
 using context.Interfaces;
+using domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using pos.Core.Domain.Entities;
 using System;
@@ -15,6 +16,7 @@ namespace pos.context.FluentConfigurations
             modelBuilder.Entity<ProductPrice>(entity =>
             {
                 entity.Property(x => x.UnitPrice)
+                    .HasColumnType(DatabaseStandards.SQL_DECIMALTWOPLACES)
                     .IsRequired(true);
 
                 entity.Property(x => x.IsCurrentPrice)

@@ -34,7 +34,7 @@ namespace pos.context.FluentConfigurations
                     .HasMaxLength(DatabaseStandards.CYPHER_GUID);
 
                 entity.Property(x => x.ExpirationDate)
-                  .IsRequired(false)
+                  .IsRequired(true)
                   .HasColumnType(DatabaseStandards.SQL_DATETIME)
                   .HasComment("Session expiration date");
             });

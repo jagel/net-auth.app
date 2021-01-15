@@ -15,10 +15,12 @@ namespace pos.context.FluentConfigurations
             modelBuilder.Entity<Purchase>(entity =>
             {
                 entity.Property(x => x.Discount)
+                    .HasColumnType(DatabaseStandards.SQL_DECIMALTWOPLACES)
                     .HasDefaultValue(0)
                     .IsRequired(true);
 
                 entity.Property(x => x.Total)
+                   .HasColumnType(DatabaseStandards.SQL_DECIMALTWOPLACES)
                    .IsRequired(true);
 
                 entity.Property(x => x.PurchaseDate)

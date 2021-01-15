@@ -17,7 +17,7 @@ namespace context.AutoModelBuilder
             modelBuilder.Entity<TEntity>(entity =>
             {
                 entity.Property(x => x.Id)
-                    .HasColumnName(EntityName)
+                    .HasColumnName(EntityPKName)
                     .HasComment($"Primary key");
 
                 entity.HasKey(x => x.Id)
@@ -26,7 +26,6 @@ namespace context.AutoModelBuilder
                 entity.Property(x => x.Name)
                     .IsRequired(true)
                     .IsUnicode(false)
-                    .HasMaxLength(DatabaseStandards.NAME_LENGHT)
                     .HasComment("Name");
 
                 entity.Property(x => x.Description)
@@ -49,6 +48,7 @@ namespace context.AutoModelBuilder
                 entity.Property(x => x.Status)
                     .HasDefaultValue(EDB_ItemStatus.Active)
                     .HasConversion(Converters.FromEnum<EDB_ItemStatus>())
+                    .HasMaxLength(DatabaseStandards.ENUM_NAME)
                     .IsRequired(true)
                     .HasMaxLength(DatabaseStandards.ENUM_NAME)
                     .HasComment("Standard Status");

@@ -6,7 +6,6 @@ namespace pos.Core.Domain.Entities
     {
         public int Amount { get; set; }
         public decimal UnitPrice { get; set; }
-        public decimal Total { get; set; }
 
         public int ProductId { get; set; }
         public int PurchaseSummaryId { get; set; }

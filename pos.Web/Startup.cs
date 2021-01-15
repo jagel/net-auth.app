@@ -1,11 +1,14 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using pos.context.dbContext;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +28,15 @@ namespace pos.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            string ConnectionString = Configuration["pos:ConnectionString"];
+
+            services.AddDbContext<PosDbContext>(
+                option => {
+                    option.UseSqlServer(ConnectionString);
+                }
+            );
+
             services.AddControllers();
         }
 
@@ -44,7 +56,13 @@ namespace pos.Web
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.Map("", async appBuilder =>
+                {
+                    await appBuilder.Response.WriteAsync("Point of sale API");
+                });
+
                 endpoints.MapControllers();
+                
             });
         }
     }

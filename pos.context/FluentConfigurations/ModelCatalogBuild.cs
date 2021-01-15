@@ -19,6 +19,7 @@ namespace pos.context.FluentConfigurations
             {
                 entity.Property(x => x.OrderDisplay)
                     .HasDefaultValue(EDB_CatalogDisplay.Alphabet_Asc)
+                    .HasMaxLength(DatabaseStandards.ENUM_NAME)
                     .HasConversion(Converters.FromEnum<EDB_CatalogDisplay>())
                     .IsRequired(true);
             });
