@@ -1,5 +1,6 @@
 ﻿
 using Common.Domain.EntityBase.Enitties;
+using System.Text.Json.Serialization;
 
 namespace PointOfSale.Domain.EntityFramework.Entities
 {
@@ -11,7 +12,9 @@ namespace PointOfSale.Domain.EntityFramework.Entities
         public int ProductId { get; set; }
         public int PurchaseSummaryId { get; set; }
 
+        [JsonIgnore]
         public virtual Product Product { get; set; }
+        [JsonIgnore]
         public virtual Purchase PurchaseSummary { get; set; }
     }
 }

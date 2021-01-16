@@ -1,5 +1,6 @@
 ﻿using Common.Domain.EntityBase.Enitties;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace PointOfSale.Domain.EntityFramework.Entities
 {
@@ -15,11 +16,16 @@ namespace PointOfSale.Domain.EntityFramework.Entities
         public bool IsPrimary { get; set; }
         public int? OrganizationParentId { get; set; }
 
+        [JsonIgnore]
         public virtual Organization OrganizationParent { get; set; }
 
+        [JsonIgnore]
         public virtual IEnumerable<Organization> OrganizationChilds { get; set; }
+        [JsonIgnore]
         public virtual IEnumerable<OrganizationUser> OrganizationUsers { get; set; }
+        [JsonIgnore]
         public virtual IEnumerable<ProductPrice> ProductPrices { get; set; }
+        [JsonIgnore]
         public virtual IEnumerable<Stock> Stocks { get; set; }
     }
 }

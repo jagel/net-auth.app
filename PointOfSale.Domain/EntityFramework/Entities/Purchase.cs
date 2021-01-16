@@ -1,6 +1,7 @@
 ﻿using Common.Domain.EntityBase.Enitties;
 using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace PointOfSale.Domain.EntityFramework.Entities
 {
@@ -16,8 +17,10 @@ namespace PointOfSale.Domain.EntityFramework.Entities
 
         public int UserId { get; set; }
 
+        [JsonIgnore]
         public virtual User User { get; set; }
 
-        public IEnumerable<PurchaseProduct> PurchaseProducts { get; set; }
+        [JsonIgnore]
+        public virtual IEnumerable<PurchaseProduct> PurchaseProducts { get; set; }
     }
 }

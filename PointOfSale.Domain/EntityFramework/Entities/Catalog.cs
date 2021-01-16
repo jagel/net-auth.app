@@ -1,6 +1,7 @@
 ﻿using Common.Domain.Definitions;
 using Common.Domain.EntityBase.Enitties;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace PointOfSale.Domain.EntityFramework.Entities
 {
@@ -13,6 +14,7 @@ namespace PointOfSale.Domain.EntityFramework.Entities
 
         public EDB_CatalogDisplay OrderDisplay { get; set; }
 
+        [JsonIgnore]
         public virtual IEnumerable<CatalogItem> CatalogItems { get; set; }
 
     }

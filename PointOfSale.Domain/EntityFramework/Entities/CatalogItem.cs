@@ -1,5 +1,6 @@
 ﻿using Common.Domain.EntityBase.EntityBaseModel;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace PointOfSale.Domain.EntityFramework.Entities
 {
@@ -15,8 +16,10 @@ namespace PointOfSale.Domain.EntityFramework.Entities
 
         public int CatalogId { get; set; }
 
+        [JsonIgnore]
         public virtual Catalog Catalog { get; set; }
 
+        [JsonIgnore]
         public virtual IEnumerable<Product> Products { get; set; }
     }
 }

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Common.Infrastructure.EntityFrameworkTools.Interfaces;
+using Microsoft.AspNetCore.Mvc;
+using PointOfSale.Domain.EntityFramework.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +14,13 @@ namespace PointOfSale.Presenter.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
+        private readonly IRepository<Product> productRepository;
+
+        public ProductController(IRepository<Product> productRepository)
+        {
+            this.productRepository = productRepository;
+        }
+
         // GET: api/<ProductController>
         [HttpGet]
         public IEnumerable<string> Get()
@@ -21,9 +30,9 @@ namespace PointOfSale.Presenter.Controllers
 
         // GET api/<ProductController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
-            return "value";
+            return Ok(await productRepository.Handler(id));
         }
 
         // POST api/<ProductController>

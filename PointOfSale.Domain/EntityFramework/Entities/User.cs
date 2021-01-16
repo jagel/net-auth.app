@@ -1,6 +1,7 @@
 ﻿using Common.Domain.EntityBase.EntityBaseModel;
 using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace PointOfSale.Domain.EntityFramework.Entities
 {
@@ -18,7 +19,9 @@ namespace PointOfSale.Domain.EntityFramework.Entities
         public string Email { get; set; }
         public DateTime ExpirationDate { get; set; }
 
+        [JsonIgnore]
         public virtual IEnumerable<OrganizationUser> OrganizationUsers { get; set; }
+        [JsonIgnore]
         public virtual IEnumerable<Purchase> Purchases { get; set; }
     }
 }

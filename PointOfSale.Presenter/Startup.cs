@@ -1,3 +1,4 @@
+using Common.Infrastructure.EntityFrameworkTools.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -8,6 +9,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using PointOfSale.Application.Products.Interfaces;
+using PointOfSale.Domain.EntityFramework.Entities;
 using PointOfSale.Infrastructure.EntityFrameworkDataAccess.ContextConfiguration;
 using System;
 using System.Collections.Generic;
@@ -30,14 +33,19 @@ namespace PointOfSale.Presenter
         {
 
             var pointOfSalseConnectionString = Configuration["PointOfSale:ConnectionString"];
-
+            
             services.AddDbContext<PointOfSaleDbContext>(
                 option =>
                 {
                     option.UseSqlServer(pointOfSalseConnectionString);
                 });
 
-            services.AddControllers();
+            services.AddTransient<IRepository<Product>, GetProduct>();
+
+            services.AddControllers().AddNewtonsoftJson(options => {
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                options.SerializerSettings.MaxDepth = 1;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
