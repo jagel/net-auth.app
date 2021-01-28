@@ -1,4 +1,5 @@
 ﻿using Common.Domain.EntityBase.Enitties;
+using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
@@ -15,6 +16,8 @@ namespace PointOfSale.Domain.EntityFramework.Entities
         }
         public bool IsPrimary { get; set; }
         public int? OrganizationParentId { get; set; }
+        public Guid Token { get; set; }
+
 
         [JsonIgnore]
         public virtual Organization OrganizationParent { get; set; }

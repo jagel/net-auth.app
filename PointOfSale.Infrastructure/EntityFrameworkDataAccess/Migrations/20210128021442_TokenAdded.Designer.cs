@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PointOfSale.Infrastructure.EntityFrameworkDataAccess.ContextConfiguration;
 
 namespace PointOfSale.Infrastructure.EntityFrameworkDataAccess.Migrations
 {
     [DbContext(typeof(PointOfSaleDbContext))]
-    partial class PointOfSaleDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210128021442_TokenAdded")]
+    partial class TokenAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -60,6 +62,9 @@ namespace PointOfSale.Infrastructure.EntityFrameworkDataAccess.Migrations
                         .HasColumnType("nvarchar(20)")
                         .HasDefaultValue("Active")
                         .HasComment("Standard Status");
+
+                    b.Property<Guid>("Token")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2")
@@ -261,6 +266,9 @@ namespace PointOfSale.Infrastructure.EntityFrameworkDataAccess.Migrations
                         .HasColumnType("nvarchar(20)")
                         .HasDefaultValue("Active")
                         .HasComment("Standard Status");
+
+                    b.Property<Guid>("Token")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2")

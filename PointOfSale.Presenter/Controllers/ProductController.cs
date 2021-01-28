@@ -1,7 +1,9 @@
-﻿using Common.Infrastructure.EntityFrameworkTools.Interfaces;
+﻿using Common.Domain.Models.Response;
+using Common.Infrastructure.EntityFrameworkTools.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PointOfSale.Domain.EntityFramework.Entities;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,25 +16,40 @@ namespace PointOfSale.Presenter.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
-        private readonly IRepository<Product> productRepository;
+        private readonly IRepositoryGetById<Product> getProductById;
+        private readonly IRepositoryGetAll<Product> getAllProducts;
 
-        public ProductController(IRepository<Product> productRepository)
+        public ProductController(
+            IRepositoryGetById<Product> getProductById, 
+            IRepositoryGetAll<Product> getAllProducts)
         {
-            this.productRepository = productRepository;
+            this.getProductById = getProductById;
+            this.getAllProducts = getAllProducts;
         }
 
         // GET: api/<ProductController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IActionResult> Get()
         {
-            return new string[] { "value1", "value2" };
+            var products = await getAllProducts.Handler();
+            var response = new ResponseStandardModel<IEnumerable<Product>>()
+            {
+                Response = products
+            };
+            return Ok(response);
         }
 
         // GET api/<ProductController>/5
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            return Ok(await productRepository.Handler(id));
+            var product = await getProductById.Handler(id);
+            
+            var response = new ResponseStandardModel<Product>()
+            {
+                Response = product
+            };
+            return Ok(response);
         }
 
         // POST api/<ProductController>

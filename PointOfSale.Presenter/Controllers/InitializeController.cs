@@ -1,19 +1,31 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Common.Domain.Models.Response;
+using Microsoft.AspNetCore.Mvc;
+using PointOfSale.Application.Common.Initialize.Interfaces;
 using System.Threading.Tasks;
 
 namespace PointOfSale.Presenter.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class InitializeController : Controller
+    public class InitializeController : ControllerBase
     {
-        [HttpGet]
-        public IActionResult Index()
+        private readonly IInitializePointOfSale initialize;
+        public InitializeController(IInitializePointOfSale initialize)
         {
-            return View();
+            this.initialize = initialize;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            await initialize.InitializeDatabase();
+
+            var response = new ResponseStandardModel<string>()
+            {
+                Message = "Data saved successfully",
+                Response = "Success"
+            };
+            return Ok(response);
         }
     }
 }

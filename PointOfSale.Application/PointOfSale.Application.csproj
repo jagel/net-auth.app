@@ -14,4 +14,9 @@
     <ProjectReference Include="..\PointOfSale.Infrastructure\PointOfSale.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Organizations\Services\" />
+    <Folder Include="Products\Services\" />
+  </ItemGroup>
+
 </Project>

@@ -1,21 +1,13 @@
-using Common.Infrastructure.EntityFrameworkTools.Interfaces;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using PointOfSale.Application.Products.Interfaces;
-using PointOfSale.Domain.EntityFramework.Entities;
+using PointOfSale.Application;
 using PointOfSale.Infrastructure.EntityFrameworkDataAccess.ContextConfiguration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace PointOfSale.Presenter
 {
@@ -40,12 +32,16 @@ namespace PointOfSale.Presenter
                     option.UseSqlServer(pointOfSalseConnectionString);
                 });
 
-            services.AddTransient<IRepository<Product>, GetProduct>();
+            services.AddApplicationInitialization();
 
-            services.AddControllers().AddNewtonsoftJson(options => {
-                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-                options.SerializerSettings.MaxDepth = 1;
-            });
+            //services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme) //Authentication scheme is the authentication configuration
+            //    .AddCookie(o=> o.LoginPath= "/api/account/login"); //cookies as default
+
+            services.AddControllers();
+            //    .AddNewtonsoftJson(options =>
+            //{
+            //    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,6 +56,7 @@ namespace PointOfSale.Presenter
 
             app.UseRouting();
 
+            //app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

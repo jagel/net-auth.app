@@ -15,8 +15,10 @@ namespace PointOfSale.Domain.EntityFramework.Entities
 
         public string UserName { get; set; }
         public string Token { get; set; }
+        [JsonIgnore]
         public string Pasword { get; set; }
         public string Email { get; set; }
+        [JsonIgnore]
         public DateTime ExpirationDate { get; set; }
 
         [JsonIgnore]
